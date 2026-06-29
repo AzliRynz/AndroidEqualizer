@@ -1,27 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/equalizerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:background="?attr/colorSurface"
+    android:padding="16dp">
 
     <RelativeLayout
         android:id="@+id/equalizer_action_container"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:layout_marginTop="10dp">
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/equalizer_back_btn"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:clickable="true"
             android:focusable="true"
             android:padding="12dp"
-            android:src="@drawable/ic_close_black_24dp" />
+            android:src="@drawable/ic_close_black_24dp"
+            android:contentDescription="Close Equalizer"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <TextView
             android:id="@+id/equalizer_fragment_title"
@@ -30,7 +35,9 @@
             android:layout_centerInParent="true"
             android:text="@string/eq"
             android:textAllCaps="true"
-            android:textSize="25sp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/equalizer_switch"
@@ -38,48 +45,41 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp" />
+            android:thumbTint="?attr/colorPrimary"
+            android:trackTint="?attr/colorSurfaceVariant" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/equalizer_action_container"
-        android:orientation="vertical">
+        android:layout_below="@id/equalizer_action_container"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp">
 
         <com.db.chart.view.LineChartView
             android:id="@+id/lineChart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp" />
+            android:layout_weight="3.5"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp" />
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"
-            android:layout_weight="1"
-            android:layoutDirection="ltr"
-            >
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="20dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/abc_btn_default_mtrl_shape"
+            android:backgroundTint="?attr/colorSurfaceVariant"
+            android:padding="4dp">
 
             <Spinner
                 android:id="@+id/equalizer_preset_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp" />
-
-        </RelativeLayout>
-
+                android:layout_height="48dp"
+                android:spinnerMode="dropdown"
+                android:layout_marginStart="8dp" />
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/equalizerContainer"
@@ -87,161 +87,166 @@
             android:layout_height="0dp"
             android:layout_weight="6"
             android:orientation="horizontal"
-            android:padding="3dp">
+            android:gravity="center"
+            android:background="@drawable/abc_btn_default_mtrl_shape"
+            android:backgroundTint="?attr/colorSurfaceInverse"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="4dp"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
                 <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="8"
-                    android:layoutDirection="ltr"
-                    >
-
+                    android:layout_weight="1"
+                    android:layoutDirection="ltr">
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                         android:id="@+id/seekBar1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:thumb="@drawable/custom_equalizer_thumb"
                         app:seekBarRotation="CW270" />
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
                 <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="8"
-                    android:layoutDirection="ltr"
-                    >
-
+                    android:layout_weight="1"
+                    android:layoutDirection="ltr">
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                         android:id="@+id/seekBar2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:thumb="@drawable/custom_equalizer_thumb"
                         app:seekBarRotation="CW270" />
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
                 <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="8"
-                    android:layoutDirection="ltr"
-                    >
-
+                    android:layout_weight="1"
+                    android:layoutDirection="ltr">
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                         android:id="@+id/seekBar3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:thumb="@drawable/custom_equalizer_thumb"
                         app:seekBarRotation="CW270" />
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
                 <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="8"
-                    android:layoutDirection="ltr"
-                    >
-
+                    android:layout_weight="1"
+                    android:layoutDirection="ltr">
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                         android:id="@+id/seekBar4"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:thumb="@drawable/custom_equalizer_thumb"
                         app:seekBarRotation="CW270" />
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
                 <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="8"
-                    android:layoutDirection="ltr"
-                    >
-
+                    android:layout_weight="1"
+                    android:layoutDirection="ltr">
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                         android:id="@+id/seekBar5"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:thumb="@drawable/custom_equalizer_thumb"
                         app:seekBarRotation="CW270" />
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -249,24 +254,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="3"
-            android:orientation="horizontal">
+            android:layout_weight="3.5"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="8dp">
 
             <com.bullhead.equalizer.AnalogController
                 android:id="@+id/controllerBass"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp" />
 
             <com.bullhead.equalizer.AnalogController
                 android:id="@+id/controller3D"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
 
     </LinearLayout>
-
 
 </RelativeLayout>
