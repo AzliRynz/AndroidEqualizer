@@ -499,6 +499,7 @@ public class DialogEqualizerFragment extends DialogFragment {
     public void onDestroy() {
         super.onDestroy();
 
+        /**
         if (mEqualizer != null) {
             mEqualizer.release();
         }
@@ -510,6 +511,7 @@ public class DialogEqualizerFragment extends DialogFragment {
         if (presetReverb != null) {
             presetReverb.release();
         }
+        */
 
         Settings.isEditing = false;
 
