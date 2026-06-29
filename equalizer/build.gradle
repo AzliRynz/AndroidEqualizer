@@ -1,52 +1,66 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group="com.github.azlirynz"
-version="2.0"
+plugins {
+	id 'com.android.library'
+	id 'maven-publish'
+}
+
+group = "com.github.azlirynz"
+version = "2.0.0"
 
 android {
-    compileSdkVersion 30
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0.0"
+	namespace "com.bullhead.equalizer"
 
-    }
+	compileSdk 36
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+	defaultConfig {
+		minSdk 21
+		targetSdk 36
 
-}
-// build a jar with source files
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    failOnError  false
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+		versionCode 1
+		versionName "2.0.0"
+
+		consumerProguardFiles "proguard-rules.pro"
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles(
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
+		}
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
+	}
+
+	publishing {
+		singleVariant("release") {
+			withSourcesJar()
+			withJavadocJar()
+		}
+	}
 }
 
-// build a jar with javadoc
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.diogobernardino:williamchart:2.2'
-    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
-    implementation 'com.google.android.material:material:1.14.0'
+	implementation 'androidx.appcompat:appcompat:1.7.1'
+	implementation 'com.google.android.material:material:1.14.0'
+	implementation 'com.diogobernardino:williamchart:2.2'
+	implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
+}
 
+afterEvaluate {
+	publishing {
+		publications {
+			release(MavenPublication) {
+				from components.release
+
+				groupId = project.group
+				artifactId = project.name
+				version = project.version
+			}
+		}
+	}
 }
