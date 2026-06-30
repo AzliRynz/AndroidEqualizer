@@ -1,27 +1,48 @@
-apply plugin: 'com.android.application'
+plugins {
+	id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 30
-    defaultConfig {
-        applicationId "com.bullhead.androidequalizer"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+	namespace "com.bullhead.androidequalizer"
+
+	compileSdk 36
+
+	defaultConfig {
+		applicationId "com.bullhead.androidequalizer"
+
+		minSdk 21
+		targetSdk 36
+
+		versionCode 1
+		versionName "1.0"
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles(
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
+		}
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
+	}
+
+	buildFeatures {
+		buildConfig = true
+	}
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-    implementation project(':equalizer')
+	implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation 'com.google.code.gson:gson:2.8.6'
+	implementation project(":equalizer")
+
+	implementation "androidx.appcompat:appcompat:1.7.1"
+	implementation "androidx.constraintlayout:constraintlayout:2.2.1"
+	implementation "com.google.code.gson:gson:2.13.1"
 }
